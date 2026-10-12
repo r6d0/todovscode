@@ -4,6 +4,7 @@
 	"version": "0.0.1",
 	"publisher": "r6d0",
 	"repository": "https://github.com/r6d0/vstodo",
+	"icon": "./vstodo_icon.png",
 	"engines": {
 		"vscode": "^1.100.0"
 	},
