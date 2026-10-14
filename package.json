@@ -1,10 +1,10 @@
 {
-	"name": "vstodo",
+	"name": "todovscode",
 	"description": "VS Code extension for highlighting TODO, FIXME, and custom tags.",
 	"version": "0.0.1",
 	"publisher": "r6d0",
-	"repository": "https://github.com/r6d0/vstodo",
-	"icon": "./vstodo_icon.png",
+	"repository": "https://github.com/r6d0/todovscode",
+	"icon": "./todovscode_icon.png",
 	"engines": {
 		"vscode": "^1.100.0"
 	},
@@ -16,7 +16,7 @@
 		"configuration": {
 			"title": "VSTodo extension",
 			"properties": {
-				"vstodo.tags": {
+				"todovscode.tags": {
 					"type": "array",
 					"title": "Highlighting rules",
 					"items": {

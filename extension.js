@@ -2,7 +2,7 @@ const vscode = require('vscode');
 
 const BOUNDARY_REGEXP = /^[\p{L}0-9]$/u
 const DEBOUNCE_TIMEOUT = 100
-const CONFIG_NAME = 'vstodo'
+const CONFIG_NAME = 'todovscode'
 
 let tagsConfig = []
 

@@ -1,6 +1,6 @@
-# vstodo
+# todovscode
 
-**vstodo** is a VS Code extension for highlighting TODO, FIXME, and custom tags.
+**todovscode** is a VS Code extension for highlighting TODO, FIXME, and custom tags.
 
 ## Features
 
@@ -13,7 +13,7 @@ Example configuration:
 
 ```json
 {
-  "vstodo.tags": [
+  "todovscode.tags": [
     {
         "tag": "TODO",
         "background": "#ffeb3b4d",
@@ -39,15 +39,15 @@ Example configuration:
 
 To customize your tags:
 1. Open VS Code Settings (`Ctrl+,` or `Cmd+,`).
-2. Find **vstodo** extension.
+2. Find **todovscode** extension.
 3. Open **settings.json** and add your settings like this:
 
-![](https://raw.githubusercontent.com/r6d0/vstodo/main/screenshots/custom_tag_example.gif)
+![](https://raw.githubusercontent.com/r6d0/todovscode/main/screenshots/custom_tag_example.gif)
 
 Highlighting example:
 
-![](https://raw.githubusercontent.com/r6d0/vstodo/main/screenshots/highlighting_example.gif)
+![](https://raw.githubusercontent.com/r6d0/todovscode/main/screenshots/highlighting_example.gif)
 
 ## License
 
-[Apache License 2.0](https://github.com/r6d0/vstodo/blob/main/LICENSE)
+[Apache License 2.0](https://github.com/r6d0/todovscode/blob/main/LICENSE)
