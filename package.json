@@ -25,24 +25,24 @@
 							"keyword": {
 								"type": "string",
 								"title": "Tag",
-								"description": "Text to highlight"
+								"description": "The text to highlight"
 							},
 							"background": {
 								"type": "string",
 								"format": "color-hex",
 								"title": "Background",
-								"description": "Background color (HEX)"
+								"description": "The background color (HEX)"
 							},
 							"foreground": {
 								"type": "string",
 								"format": "color-hex",
 								"title": "Foreground",
-								"description": "Text color (HEX)"
+								"description": "The text color (HEX)"
 							},
 							"isWholeLine": {
 								"type": "boolean",
 								"title": "isWholeLine",
-								"description": "Highlight whole line",
+								"description": "Highlights the whole line if set to true",
 								"default": false
 							}
 						}

@@ -4,14 +4,12 @@
 
 ## Features
 
-* **Tag Highlighting** - Automatically highlights TODO, FIXME, and your own custom tags.
-* **On-the-Fly Configuration** - Customize your tags instantly without restarting the editor.
-* **Flexible Styling** - Choose custom color for each tag.
+* **Highlighting**: Automatically highlights TODO, FIXME, and your own custom tags.
+* **Configuration**: Customize your tags, choose a custom color for each tag.
 
+## Configuration
 
-## Configuration Settings
-
-Here is an example of settings:
+Example configuration:
 
 ```json
 {
@@ -32,7 +30,24 @@ Here is an example of settings:
 }
 ```
 
-* `tag` (string) - Text to highlight.
-* `foreground` (string) - Text color (HEX).
-* `background` (string) - Background color (HEX).
-* `isWholeLine` (boolean) - Highlight whole line.
+* `tag` (string) - The text to highlight.
+* `foreground` (string) - The text color (HEX).
+* `background` (string) - The background color (HEX).
+* `isWholeLine` (boolean) - Highlights the whole line if set to `true`.
+
+## Examples
+
+To customize your tags:
+1. Open VS Code Settings (`Ctrl+,` or `Cmd+,`).
+2. Find **vstodo** extension.
+3. Open **settings.json** and add your settings like this:
+
+![](https://raw.githubusercontent.com/r6d0/vstodo/main/screenshots/custom_tag_example.gif)
+
+Highlighting example:
+
+![](https://raw.githubusercontent.com/r6d0/vstodo/main/screenshots/highlighting_example.gif)
+
+## License
+
+[Apache License 2.0](https://github.com/r6d0/vstodo/blob/main/LICENSE)
