@@ -42,11 +42,11 @@ To customize your tags:
 2. Find **todovscode** extension.
 3. Open **settings.json** and add your settings like this:
 
-![](https://raw.githubusercontent.com/r6d0/todovscode/main/screenshots/custom_tag_example.gif)
+![](https://raw.githubusercontent.com/r6d0/todovscode/main/screenshots/custom_tag_example_v1.gif)
 
 Highlighting example:
 
-![](https://raw.githubusercontent.com/r6d0/todovscode/main/screenshots/highlighting_example.gif)
+![](https://raw.githubusercontent.com/r6d0/todovscode/main/screenshots/highlighting_example_v1.gif)
 
 ## License
 
