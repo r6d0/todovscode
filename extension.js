@@ -48,12 +48,17 @@ function getTagsConfig() {
     const config = vscode.workspace.getConfiguration(CONFIG_NAME);
     const tags = []
     for (let item of config.tags) {
+        let rulerColor = item.foreground
+        if (!rulerColor) {
+            rulerColor = item.background
+        }
+
         tags.push({
             tag: item.tag,
             decoration: vscode.window.createTextEditorDecorationType({
                 backgroundColor: item.background,
                 color: item.foreground,
-                overviewRulerColor: item.foreground,
+                overviewRulerColor: rulerColor,
                 overviewRulerLane: vscode.OverviewRulerLane.Right,
                 rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
             })
