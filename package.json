@@ -1,7 +1,7 @@
 {
 	"name": "todovscode",
 	"description": "VS Code extension for highlighting TODO, FIXME, and custom tags.",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "r6d0",
 	"repository": "https://github.com/r6d0/todovscode",
 	"icon": "./todovscode_icon.png",
@@ -38,12 +38,6 @@
 								"format": "color-hex",
 								"title": "Foreground",
 								"description": "The text color (HEX)"
-							},
-							"isWholeLine": {
-								"type": "boolean",
-								"title": "isWholeLine",
-								"description": "Highlights the whole line if set to true",
-								"default": false
 							}
 						}
 					},
@@ -51,14 +45,12 @@
 						{
 							"tag": "TODO",
 							"background": "#ffeb3b4d",
-							"foreground": "#ffc107cc",
-							"isWholeLine": false
+							"foreground": "#ffc107cc"
 						},
 						{
 							"tag": "FIXME",
 							"background": "#ff3b3b4d",
-							"foreground": "#ff0707cc",
-							"isWholeLine": false
+							"foreground": "#ff0707cc"
 						}
 					],
 					"description": "Tags to highlight"

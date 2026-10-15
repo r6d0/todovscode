@@ -56,7 +56,6 @@ function getTagsConfig() {
                 overviewRulerColor: item.foreground,
                 overviewRulerLane: vscode.OverviewRulerLane.Right,
                 rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
-                isWholeLine: item.isWholeLine
             })
         })
     }
