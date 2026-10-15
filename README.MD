@@ -48,6 +48,10 @@ Highlighting example:
 
 ![](https://raw.githubusercontent.com/r6d0/todovscode/main/screenshots/highlighting_example_v2.gif)
 
+## Source Code
+
+[todovscode](https://github.com/r6d0/todovscode)
+
 ## License
 
 [Apache License 2.0](https://github.com/r6d0/todovscode/blob/main/LICENSE)
