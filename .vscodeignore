@@ -3,3 +3,6 @@
 screenshots/**
 node_modules/**
 .gitignore
+test/**
+__mocks__/**
+screenshots/**
