@@ -1,6 +1,5 @@
 const vscode = require('vscode');
 
-const BOUNDARY_REGEXP = /^[\p{L}0-9]$/u
 const DEBOUNCE_TIMEOUT = 100
 const CONFIG_NAME = 'todovscode'
 
@@ -10,8 +9,18 @@ function isFile(editor) {
     return editor.document.uri.scheme === 'file'
 }
 
-function isCorrectBoundary(symbol) {
-    return symbol.length == 0 || !BOUNDARY_REGEXP.test(symbol)
+function isCorrectLeftBoundary(symbol) {
+    if (symbol.length > 0) {
+        return symbol == ' ' || symbol == '\n' || symbol == '\r'
+    }
+    return false
+}
+
+function isCorrectRightBoundary(symbol) {
+    if (symbol.length > 0) {
+        return symbol == ' ' || symbol == '.' || symbol == ',' || symbol == ':' || symbol == '\n' || symbol == '\r'
+    }
+    return false
 }
 
 function getPositions(document, tag) {
@@ -35,8 +44,11 @@ function getPositions(document, tag) {
                 right = text.charAt(index + kwLength)
             }
 
-            if (isCorrectBoundary(left) && isCorrectBoundary(right)) {
-                result.push({ range: new vscode.Range(document.positionAt(index), document.positionAt(index + kwLength)) })
+            if (isCorrectLeftBoundary(left) && isCorrectRightBoundary(right)) {
+                const start = document.positionAt(index)
+                const line = document.lineAt(start.line)
+
+                result.push({ range: new vscode.Range(start, line.range.end) })
             }
             index++
         }
@@ -48,17 +60,11 @@ function getTagsConfig() {
     const config = vscode.workspace.getConfiguration(CONFIG_NAME);
     const tags = []
     for (let item of config.tags) {
-        let rulerColor = item.foreground
-        if (!rulerColor) {
-            rulerColor = item.background
-        }
-
         tags.push({
             tag: item.tag,
             decoration: vscode.window.createTextEditorDecorationType({
-                backgroundColor: item.background,
                 color: item.foreground,
-                overviewRulerColor: rulerColor,
+                overviewRulerColor: item.foreground,
                 overviewRulerLane: vscode.OverviewRulerLane.Right,
                 rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
             })
@@ -97,7 +103,12 @@ async function activate(context) {
             if (timer) {
                 clearTimeout(timer)
             }
-            timer = setTimeout(() => analyzeOpenEditor(editor), DEBOUNCE_TIMEOUT)
+            timer = setTimeout(() => {
+                for (let item of tagsConfig) {
+                    editor.setDecorations(item.decoration, [])
+                }
+                analyzeOpenEditor(editor)
+            }, DEBOUNCE_TIMEOUT)
         }
     })
 
@@ -117,5 +128,8 @@ function deactivate() { }
 
 module.exports = {
     activate,
-    deactivate
+    deactivate,
+    getPositions,
+    isCorrectLeftBoundary,
+    isCorrectRightBoundary
 }

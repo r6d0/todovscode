@@ -1,7 +1,7 @@
 {
 	"name": "todovscode",
 	"description": "VS Code extension for highlighting TODO, FIXME, and custom tags.",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "r6d0",
 	"repository": "https://github.com/r6d0/todovscode",
 	"icon": "./todovscode_icon.png",
@@ -14,7 +14,7 @@
 	"main": "./extension.js",
 	"contributes": {
 		"configuration": {
-			"title": "VSTodo extension",
+			"title": "todovscode extension",
 			"properties": {
 				"todovscode.tags": {
 					"type": "array",
@@ -27,29 +27,22 @@
 								"title": "Tag",
 								"description": "The text to highlight"
 							},
-							"background": {
-								"type": "string",
-								"format": "color-hex",
-								"title": "Background",
-								"description": "The background color (HEX)"
-							},
 							"foreground": {
 								"type": "string",
 								"format": "color-hex",
 								"title": "Foreground",
-								"description": "The text color (HEX)"
+								"description": "The text color (HEX)",
+								"default": "#ffc107cc"
 							}
 						}
 					},
 					"default": [
 						{
 							"tag": "TODO",
-							"background": "#ffeb3b4d",
 							"foreground": "#ffc107cc"
 						},
 						{
 							"tag": "FIXME",
-							"background": "#ff3b3b4d",
 							"foreground": "#ff0707cc"
 						}
 					],
@@ -58,8 +51,12 @@
 			}
 		}
 	},
-	"scripts": {},
+	"scripts": {
+		"test": "jest"
+	},
 	"devDependencies": {
-		"@types/vscode": "^1.100.0"
+		"@types/jest": "^30.0.0",
+		"@types/vscode": "^1.100.0",
+		"jest": "^30.5.2"
 	}
 }
