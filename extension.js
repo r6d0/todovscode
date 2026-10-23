@@ -3,6 +3,7 @@ const vscode = require('vscode');
 const DEBOUNCE_TIMEOUT = 100
 const CONFIG_NAME = 'todovscode'
 
+let timer
 let tagsConfig = []
 
 function isFile(editor) {
@@ -11,14 +12,14 @@ function isFile(editor) {
 
 function isCorrectLeftBoundary(symbol) {
     if (symbol.length > 0) {
-        return symbol == ' ' || symbol == '\n' || symbol == '\r'
+        return symbol == ' ' || symbol == '\n' || symbol == '\r' || symbol == '\t'
     }
     return false
 }
 
 function isCorrectRightBoundary(symbol) {
     if (symbol.length > 0) {
-        return symbol == ' ' || symbol == '.' || symbol == ',' || symbol == ':' || symbol == '\n' || symbol == '\r'
+        return symbol == ' ' || symbol == '.' || symbol == ',' || symbol == ':' || symbol == '\n' || symbol == '\r' || symbol == '\t'
     }
     return false
 }
@@ -57,28 +58,60 @@ function getPositions(document, tag) {
 }
 
 function getTagsConfig() {
-    const config = vscode.workspace.getConfiguration(CONFIG_NAME);
     const tags = []
-    for (let item of config.tags) {
-        tags.push({
-            tag: item.tag,
-            decoration: vscode.window.createTextEditorDecorationType({
-                color: item.foreground,
-                overviewRulerColor: item.foreground,
-                overviewRulerLane: vscode.OverviewRulerLane.Right,
-                rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
+    const config = vscode.workspace.getConfiguration(CONFIG_NAME);
+    if (config) {
+        for (let item of config.tags) {
+            tags.push({
+                tag: item.tag,
+                decoration: vscode.window.createTextEditorDecorationType({
+                    color: item.foreground,
+                    overviewRulerColor: item.foreground,
+                    overviewRulerLane: vscode.OverviewRulerLane.Right,
+                    rangeBehavior: vscode.DecorationRangeBehavior.ClosedClosed,
+                })
             })
-        })
+        }
     }
     return tags
 }
 
-async function analyzeOpenEditor(editor) {
-    for (let item of tagsConfig) {
+async function analyzeOpenEditor(editor, tags) {
+    for (let item of tags) {
         const positions = getPositions(editor.document, item.tag)
         if (positions.length > 0) {
             editor.setDecorations(item.decoration, positions)
         }
+    }
+}
+
+async function onDidChangeTextDocument(event) {
+    const editor = vscode.window.activeTextEditor
+    if (editor && isFile(editor)) {
+        if (timer) {
+            clearTimeout(timer)
+        }
+        timer = setTimeout(() => {
+            for (let item of tagsConfig) {
+                editor.setDecorations(item.decoration, [])
+            }
+            analyzeOpenEditor(editor, tagsConfig)
+        }, DEBOUNCE_TIMEOUT)
+    }
+}
+
+async function onDidChangeActiveTextEditor(editor) {
+    if (editor && isFile(editor)) {
+        analyzeOpenEditor(editor, tagsConfig)
+    }
+}
+
+async function onDidChangeConfiguration(event) {
+    if (event.affectsConfiguration(CONFIG_NAME)) {
+        for (let item of tagsConfig) {
+            item.decoration.dispose()
+        }
+        tagsConfig = getTagsConfig()
     }
 }
 
@@ -87,39 +120,12 @@ async function activate(context) {
 
     const editor = vscode.window.activeTextEditor
     if (editor && isFile(editor)) {
-        analyzeOpenEditor(editor)
+        analyzeOpenEditor(editor, tagsConfig)
     }
 
-    const changeActiveTextEditor = vscode.window.onDidChangeActiveTextEditor(async editor => {
-        if (editor && isFile(editor)) {
-            analyzeOpenEditor(editor)
-        }
-    })
-
-    let timer
-    const changeTextDocument = vscode.workspace.onDidChangeTextDocument(async event => {
-        const editor = vscode.window.activeTextEditor
-        if (editor && isFile(editor)) {
-            if (timer) {
-                clearTimeout(timer)
-            }
-            timer = setTimeout(() => {
-                for (let item of tagsConfig) {
-                    editor.setDecorations(item.decoration, [])
-                }
-                analyzeOpenEditor(editor)
-            }, DEBOUNCE_TIMEOUT)
-        }
-    })
-
-    const changeConfiguration = vscode.workspace.onDidChangeConfiguration(async event => {
-        if (event.affectsConfiguration(CONFIG_NAME)) {
-            for (let item of tagsConfig) {
-                item.decoration.dispose()
-            }
-            tagsConfig = getTagsConfig()
-        }
-    })
+    const changeActiveTextEditor = vscode.window.onDidChangeActiveTextEditor(onDidChangeActiveTextEditor)
+    const changeTextDocument = vscode.workspace.onDidChangeTextDocument(onDidChangeTextDocument)
+    const changeConfiguration = vscode.workspace.onDidChangeConfiguration(onDidChangeConfiguration)
 
     context.subscriptions.push(changeActiveTextEditor, changeTextDocument, changeConfiguration);
 }
@@ -131,5 +137,10 @@ module.exports = {
     deactivate,
     getPositions,
     isCorrectLeftBoundary,
-    isCorrectRightBoundary
+    isCorrectRightBoundary,
+    getTagsConfig,
+    analyzeOpenEditor,
+    onDidChangeActiveTextEditor,
+    onDidChangeTextDocument,
+    onDidChangeConfiguration
 }

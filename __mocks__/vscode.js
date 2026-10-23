@@ -1,6 +1,7 @@
 class Document {
-    constructor(text) {
+    constructor(text, scheme) {
         this.text = text
+        this.uri = { scheme: scheme }
     }
 
     getText() {
@@ -14,7 +15,7 @@ class Document {
     lineAt(number) {
         return {
             number: number,
-            range: new Range(0, this.text.length-1)
+            range: new Range(0, this.text.length - 1)
         }
     }
 }
@@ -26,7 +27,33 @@ class Range {
     }
 }
 
+class Workspace {
+    getConfiguration(name) {
+        return this[name]
+    }
+
+    onDidChangeTextDocument(callback) { }
+
+    onDidChangeConfiguration(callback) { }
+}
+
+class Window {
+    createTextEditorDecorationType(data) {
+        data.dispose = () => {}
+        return data
+    }
+    onDidChangeActiveTextEditor(callback) { }
+}
+
 module.exports = {
     Document,
-    Range
+    Range,
+    workspace: new Workspace(),
+    window: new Window(),
+    OverviewRulerLane: {
+        Right: 0
+    },
+    DecorationRangeBehavior: {
+        ClosedClosed: 0
+    }
 };

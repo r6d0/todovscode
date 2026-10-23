@@ -52,7 +52,7 @@
 		}
 	},
 	"scripts": {
-		"test": "jest"
+		"test": "jest --coverage"
 	},
 	"devDependencies": {
 		"@types/jest": "^30.0.0",
