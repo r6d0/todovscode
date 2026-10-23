@@ -54,6 +54,9 @@
 	"scripts": {
 		"test": "jest --coverage"
 	},
+	"jest": {
+		"coverageReporters": ["json-summary", "text", "lcov"]
+	},
 	"devDependencies": {
 		"@types/jest": "^30.0.0",
 		"@types/vscode": "^1.100.0",
