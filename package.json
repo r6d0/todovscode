@@ -52,9 +52,7 @@
 		}
 	},
 	"scripts": {
-		"test": "jest --coverage",
-		"test:coverage": "npm test -- --coverage",
-		"test:badges": "npm run test:coverage  && jest-coverage-badges"
+		"test": "jest --coverage"
 	},
 	"jest": {
 		"coverageReporters": [
@@ -66,7 +64,6 @@
 	"devDependencies": {
 		"@types/jest": "^30.0.0",
 		"@types/vscode": "^1.100.0",
-		"jest": "^30.5.2",
-		"jest-coverage-badges": "^1.1.2"
+		"jest": "^30.5.2"
 	}
 }

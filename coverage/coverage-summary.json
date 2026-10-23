@@ -1,3 +1,0 @@
-{"total": {"lines":{"total":64,"covered":60,"skipped":0,"pct":93.75},"statements":{"total":64,"covered":60,"skipped":0,"pct":93.75},"functions":{"total":12,"covered":10,"skipped":0,"pct":83.33},"branches":{"total":45,"covered":38,"skipped":0,"pct":84.44},"branchesTrue":{"total":0,"covered":0,"skipped":0,"pct":"Unknown"}}
-,"/home/runner/work/todovscode/todovscode/extension.js": {"lines":{"total":64,"covered":60,"skipped":0,"pct":93.75},"functions":{"total":12,"covered":10,"skipped":0,"pct":83.33},"statements":{"total":64,"covered":60,"skipped":0,"pct":93.75},"branches":{"total":45,"covered":38,"skipped":0,"pct":84.44}}
-}
