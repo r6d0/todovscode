@@ -26,13 +26,18 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run test:badges
+    - run: npm run test
+    - run: npm install --save jest-coverage-badges
+    - run: jest-coverage-badges
     
     - name: Commit and push changes
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git add coverage/*
+        git add coverage/badge-branches.svg
+        git add coverage/badge-functions.svg
+        git add coverage/badge-lines.svg
+        git add coverage/badge-statements.svg
         git commit -m "Auto-generate file" || exit 0
         git push
       env:
