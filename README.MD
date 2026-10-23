@@ -3,6 +3,8 @@
 **todovscode** is a VS Code extension for highlighting TODO, FIXME, and custom tags.
 
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/r6d0/todovscode/node.js.yml)
+![GitHub License](https://img.shields.io/github/license/r6d0/todovscode)
+
 
 ## Features
 
